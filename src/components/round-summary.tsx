@@ -17,10 +17,31 @@ export function RoundSummary({ gameState }: RoundSummaryProps) {
   if (isStart) {
     return (
       <div className="p-6">
-        <h3 className="mb-6 text-lg font-semibold text-zinc-900">Game Start</h3>
-        <p className="text-sm text-zinc-500">
+        <h3 className="mb-4 text-lg font-semibold text-zinc-900">Game Start</h3>
+        <p className="mb-6 text-sm text-zinc-500">
           The game has begun! Make your first move to see how customers respond.
         </p>
+
+        <div className="space-y-4 border-t border-zinc-100 pt-4 text-sm text-zinc-600">
+          <div>
+            <span className="font-semibold text-zinc-900">Goal:</span> Maximize
+            revenue over 10 rounds.
+          </div>
+          <div>
+            <span className="font-semibold text-zinc-900">Customers:</span> 9
+            customers distributed along the road. They buy from the{" "}
+            <span className="font-medium text-zinc-900">nearest vendor</span> if
+            the price is within their budget.
+          </div>
+          <div>
+            <span className="font-semibold text-zinc-900">Budget:</span> Starts
+            at $10 (1km away) and drops by $1 for every extra km.
+          </div>
+          <div>
+            <span className="font-semibold text-zinc-900">Competitor:</span>{" "}
+            Fixed price ($5) and location (10km).
+          </div>
+        </div>
       </div>
     );
   }
