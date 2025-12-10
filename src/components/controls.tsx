@@ -21,7 +21,7 @@ export function Controls({
   if (showNextRound) {
     return (
       <div className="mx-auto mt-8 flex max-w-md justify-center">
-        <Button onClick={onNextRound} color="blue" className="w-full">
+        <Button onClick={onNextRound} className="w-full">
           Start Round {gameState.round}
         </Button>
       </div>
@@ -37,7 +37,7 @@ export function Controls({
       <Button
         onClick={() => onAction("DECREASE_PRICE")}
         disabled={disabled || player.price <= 0}
-        color="zinc"
+        color="indigo"
       >
         Decrease Price (-$1)
       </Button>
@@ -45,7 +45,7 @@ export function Controls({
       <Button
         onClick={() => onAction("INCREASE_PRICE")}
         disabled={disabled}
-        color="zinc"
+        color="indigo"
       >
         Increase Price (+$1)
       </Button>
@@ -53,7 +53,7 @@ export function Controls({
       <Button
         onClick={() => onAction("MOVE_LEFT")}
         disabled={disabled || player.location <= 0}
-        color="blue"
+        color="amber"
       >
         Move Left (1km)
       </Button>
@@ -61,7 +61,7 @@ export function Controls({
       <Button
         onClick={() => onAction("MOVE_RIGHT")}
         disabled={disabled || player.location >= 10}
-        color="blue"
+        color="amber"
       >
         Move Right (1km)
       </Button>
