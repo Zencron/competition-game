@@ -21,10 +21,6 @@ export default function Home() {
   const handleAction = (action: ActionType) => {
     const newState = processTurn(gameState, action);
     setGameState(newState);
-
-    // Show summary if the game is not over (or even if it is, to show last round stats?)
-    // If game is over, we might want to show the last round summary first, then the game summary.
-    // Let's show round summary first.
     setShowRoundSummary(true);
   };
 
@@ -38,40 +34,43 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl">
-      <div className="mb-12 text-center">
-        <Heading level={1}>Vendor Competition Game</Heading>
-        <Text className="mt-2 text-zinc-600">
-          Maximize your revenue by adjusting price and location. Round{" "}
-          {gameState.round} of {gameState.maxRounds}.
-        </Text>
-      </div>
+    <div className="flex min-h-screen bg-zinc-50">
+      {/* Main Game Area */}
+      <div className="flex-1 p-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-12 text-center">
+            <Heading level={1}>Vendor Competition Game</Heading>
+            <Text className="mt-2 text-zinc-600">
+              Maximize your revenue by adjusting price and location. Round{" "}
+              {gameState.round} of {gameState.maxRounds}.
+            </Text>
+          </div>
 
-      {!gameState.gameOver ? (
-        <>
-          <GameBoard gameState={gameState} />
-          <Controls onAction={handleAction} disabled={showRoundSummary} />
-          <RoundSummary
-            gameState={gameState}
-            isOpen={showRoundSummary}
-            onNextRound={handleNextRound}
-          />
-        </>
-      ) : (
-        // If game is over, we still might want to show the last round summary before the final graph.
-        // But currently `showRoundSummary` would be true after the last move.
-        // If `showRoundSummary` is true, we show it. When closed, if gameOver is true, we show GameSummary.
-        <>
-          {showRoundSummary ? (
-            <RoundSummary
-              gameState={gameState}
-              isOpen={showRoundSummary}
-              onNextRound={handleNextRound}
-            />
+          {!gameState.gameOver ? (
+            <>
+              <GameBoard gameState={gameState} />
+              <Controls
+                onAction={handleAction}
+                onNextRound={handleNextRound}
+                showNextRound={showRoundSummary}
+                disabled={showRoundSummary}
+                gameState={gameState}
+              />
+            </>
           ) : (
             <GameSummary gameState={gameState} onRestart={handleRestart} />
           )}
-        </>
+        </div>
+      </div>
+
+      {/* Sidebar - Round Summary */}
+      {/* Always show sidebar unless game is over? Or maybe even then? */}
+      {/* If game is over, GameSummary takes over the main area. We can hide sidebar or keep it. */}
+      {/* Let's keep it simple: Sidebar is for round summary. */}
+      {!gameState.gameOver && (
+        <aside className="w-80 flex-shrink-0">
+          <RoundSummary gameState={gameState} />
+        </aside>
       )}
     </div>
   );

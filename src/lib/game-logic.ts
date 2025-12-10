@@ -11,7 +11,8 @@ export type GameState = {
   maxRounds: number;
   player: Vendor;
   competitor: Vendor;
-  customers: [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  customers: number[]; // Locations 1-9
+  lastRoundCustomerChoices: ("PLAYER" | "COMPETITOR" | "NONE")[]; // Index corresponds to customer index
   history: {
     round: number;
     playerRevenue: number;
@@ -40,6 +41,7 @@ export const INITIAL_GAME_STATE: GameState = {
     lastRoundRevenue: 0,
   },
   customers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  lastRoundCustomerChoices: Array(9).fill("NONE"),
   history: [],
   gameOver: false,
 };
@@ -95,6 +97,7 @@ export function processTurn(
   // 2. Calculate Sales
   let playerSales = 0;
   let competitorSales = 0;
+  const customerChoices: ("PLAYER" | "COMPETITOR" | "NONE")[] = [];
 
   for (const customer of customers) {
     const distToPlayer = Math.abs(customer - player.location);
@@ -116,15 +119,24 @@ export function processTurn(
     if (distToPlayer < distToCompetitor) {
       if (canAffordPlayer) {
         playerSales++;
+        customerChoices.push("PLAYER");
+      } else {
+        customerChoices.push("NONE");
       }
     } else if (distToCompetitor < distToPlayer) {
       if (canAffordCompetitor) {
         competitorSales++;
+        customerChoices.push("COMPETITOR");
+      } else {
+        customerChoices.push("NONE");
       }
     } else {
       // Equal distance -> buy from neither
+      customerChoices.push("NONE");
     }
   }
+
+  newState.lastRoundCustomerChoices = customerChoices;
 
   // 3. Update Revenue
   const playerRoundRevenue = playerSales * player.price;
