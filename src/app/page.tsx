@@ -34,9 +34,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen bg-zinc-50">
+    <div className="grid min-h-[600px] grid-cols-[auto_auto]">
       {/* Main Game Area */}
-      <div className="flex-1 p-8">
+      <div className="w-[600px] flex-1 p-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-12 text-center">
             <Heading level={1}>Vendor Competition Game</Heading>
@@ -68,7 +68,7 @@ export default function Home() {
       {/* If game is over, GameSummary takes over the main area. We can hide sidebar or keep it. */}
       {/* Let's keep it simple: Sidebar is for round summary. */}
       {!gameState.gameOver && (
-        <aside className="w-80 flex-shrink-0">
+        <aside className="w-80 shrink-0">
           <RoundSummary gameState={gameState} />
         </aside>
       )}

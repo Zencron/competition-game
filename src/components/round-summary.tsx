@@ -16,7 +16,7 @@ export function RoundSummary({ gameState }: RoundSummaryProps) {
 
   if (isStart) {
     return (
-      <div className="h-full border-l border-zinc-200 bg-white p-6 shadow-sm">
+      <div className="p-6">
         <h3 className="mb-6 text-lg font-semibold text-zinc-900">Game Start</h3>
         <p className="text-sm text-zinc-500">
           The game has begun! Make your first move to see how customers respond.
@@ -26,7 +26,7 @@ export function RoundSummary({ gameState }: RoundSummaryProps) {
   }
 
   return (
-    <div className="h-full border-l border-zinc-200 bg-white p-6 shadow-sm">
+    <div className="p-6">
       <h3 className="mb-6 text-lg font-semibold text-zinc-900">
         Round {round - 1} Summary
       </h3>

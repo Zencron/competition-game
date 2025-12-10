@@ -48,8 +48,8 @@ export function GameBoard({ gameState }: GameBoardProps) {
                       fill="currentColor"
                       className={clsx(
                         "h-6 w-6 transition-colors duration-300",
-                        choice === "PLAYER" && "text-blue-600 scale-125",
-                        choice === "COMPETITOR" && "text-red-600 scale-125",
+                        choice === "PLAYER" && "text-blue-600",
+                        choice === "COMPETITOR" && "text-red-600",
                         choice === "NONE" && "text-zinc-400",
                       )}
                       aria-label="customer"
@@ -65,21 +65,29 @@ export function GameBoard({ gameState }: GameBoardProps) {
 
                 {/* Player Indicator */}
                 {player.location === pos && (
-                  <div className="absolute top-6 z-10 flex flex-col items-center">
-                    <div className="mb-1 rounded-full bg-blue-600 px-2 py-1 text-xs font-bold text-white shadow-lg">
+                  <div className="absolute top-10 z-20 flex flex-col items-center">
+                    <span className="text-2xl" role="img" aria-label="player">
+                      🏪
+                    </span>
+                    <div className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] font-bold whitespace-nowrap text-blue-700 shadow-sm">
                       YOU (${player.price})
                     </div>
-                    <div className="h-0 w-0 rotate-180 border-r-[6px] border-b-[8px] border-l-[6px] border-r-transparent border-b-blue-600 border-l-transparent" />
                   </div>
                 )}
 
                 {/* Competitor Indicator */}
                 {competitor.location === pos && (
-                  <div className="absolute top-6 z-10 flex flex-col items-center">
-                    <div className="mb-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white shadow-lg">
+                  <div className="absolute top-10 z-20 flex flex-col items-center">
+                    <span
+                      className="text-2xl"
+                      role="img"
+                      aria-label="competitor"
+                    >
+                      🎪
+                    </span>
+                    <div className="rounded bg-red-100 px-1.5 py-0.5 text-[10px] font-bold whitespace-nowrap text-red-700 shadow-sm">
                       COMP (${competitor.price})
                     </div>
-                    <div className="h-0 w-0 rotate-180 border-r-[6px] border-b-[8px] border-l-[6px] border-r-transparent border-b-red-600 border-l-transparent" />
                   </div>
                 )}
               </div>
@@ -88,7 +96,7 @@ export function GameBoard({ gameState }: GameBoardProps) {
         </div>
       </div>
 
-      <div className="mt-8 flex justify-between text-sm text-zinc-500">
+      <div className="mt-16 flex justify-between text-sm text-zinc-500">
         <div>
           <span className="block font-semibold text-blue-600">
             Player Revenue
