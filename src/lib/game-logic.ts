@@ -1,13 +1,9 @@
 export type Vendor = {
-  location: number; // 0 to 10
+  location: number;
   price: number;
   revenue: number;
   lastRoundSales: number;
   lastRoundRevenue: number;
-};
-
-export type Customer = {
-  location: number; // 1 to 9
 };
 
 export type GameState = {
@@ -15,7 +11,7 @@ export type GameState = {
   maxRounds: number;
   player: Vendor;
   competitor: Vendor;
-  customers: Customer[];
+  customers: [1, 2, 3, 4, 5, 6, 7, 8, 9];
   history: {
     round: number;
     playerRevenue: number;
@@ -43,7 +39,7 @@ export const INITIAL_GAME_STATE: GameState = {
     lastRoundSales: 0,
     lastRoundRevenue: 0,
   },
-  customers: Array.from({ length: 9 }, (_, i) => ({ location: i + 1 })),
+  customers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   history: [],
   gameOver: false,
 };
@@ -101,15 +97,12 @@ export function processTurn(
   let competitorSales = 0;
 
   for (const customer of customers) {
-    const distToPlayer = Math.abs(customer.location - player.location);
-    const distToCompetitor = Math.abs(customer.location - competitor.location);
+    const distToPlayer = Math.abs(customer - player.location);
+    const distToCompetitor = Math.abs(customer - competitor.location);
 
-    const wtpPlayer = calculateWillingnessToPay(
-      customer.location,
-      player.location,
-    );
+    const wtpPlayer = calculateWillingnessToPay(customer, player.location);
     const wtpCompetitor = calculateWillingnessToPay(
-      customer.location,
+      customer,
       competitor.location,
     );
 
