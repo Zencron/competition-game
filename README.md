@@ -14,6 +14,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment
 
-This project is built as a [Static Export](https://nextjs.org/docs/app/guides/static-exports) and deployed using CloudFlare pages at [competition-game.zencron.dev](https://competition-game.zencron.dev).
+This project is built as a [Static Export](https://nextjs.org/docs/app/guides/static-exports) and deployed with [CloudFlare Pages](https://pages.cloudflare.com) at [competition-game.zencron.dev](https://competition-game.zencron.dev).
 
 
